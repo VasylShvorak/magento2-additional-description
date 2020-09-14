@@ -1,0 +1,41 @@
+<?php
+/** @var $block Shvorak\ProductAdditionalDescription\Block\AdditionalDescription */
+var_dump($block->isAdditionalDescriptionAllowed());
+?>
+
+<?php if($block->isCustomerLoggedIn()): ?>
+<?php if($block->isAdditionalDescriptionAllowed()): ?>
+<div class="block review-add">
+    <div class="block-title"><strong><?= $block->escapeHtml(__('Test')) ?></strong></div>
+    <div class="block-content">
+        <form action="<?= $block->escapeUrl($block->getAction()) ?>" class="review-form" method="post" id="description_form" data-role="product-review-form">
+            <?= $block->getBlockHtml('formkey') ?>
+            <?= $block->getChildHtml('form_fields_before') ?>
+            <div class="field review-field-text required">
+                <label for="additional_description" class="label"><span><?= $block->escapeHtml(__('Additional Description')) ?></span></label>
+                <div class="control">
+                    <textarea name="additional_description" id="additional_description" cols="5" rows="3" data-validate="{required:true}"></textarea>
+                </div>
+            </div>
+            <div class="actions-toolbar review-form-actions">
+                <div class="primary actions-primary">
+                    <button type="submit" class="action submit primary"><span><?= $block->escapeHtml(__('Submit Description')) ?></span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+    <?php else: ?>
+        <div class="message info notlogged" id="review-form">
+            <div>
+                <?= $block->escapeHtml(__('You have no permission for Additional Description. Contact the administrator to discuss this user configuration.'))?>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php else: ?>
+    <div class="message info notlogged" id="review-form">
+        <div>
+            <?= $block->escapeHtml(__('Only registered users can write reviews.'))?>
+        </div>
+    </div>
+<?php endif ?>

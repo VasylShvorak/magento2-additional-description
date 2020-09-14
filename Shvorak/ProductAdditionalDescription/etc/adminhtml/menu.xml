@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Shvorak_ProductAdditionalDescription::product_additional_description" title="Product Additional Description" translate="title" module="Shvorak_ProductAdditionalDescription" sortOrder="20"  resource="Shvorak_ProductAdditionalDescription::product_additional_description"/>
+        <add id="Shvorak_ProductAdditionalDescription::description_list" title="Product Additional Description List" translate="title" module="Shvorak_ProductAdditionalDescription" sortOrder="10" parent="Shvorak_ProductAdditionalDescription::product_additional_description" action="shvorak_description/index/index/" resource="Shvorak_ProductAdditionalDescription::description_list"/>
+
+    </menu>
+</config>

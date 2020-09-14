@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="testingproduct">
+        <settings>
+            <level>1</level>
+            <collapsible>true</collapsible>
+            <label translate="true">Additional Description</label>
+        </settings>
+        <insertListing name="shvorak_description_description_grid" >
+            <settings>
+                <dataLinks>
+                    <exports>false</exports>
+                    <imports>true</imports>
+                </dataLinks>
+                <autoRender>true</autoRender>
+                <dataScope>shvorak_description_description_grid</dataScope>
+                <externalProvider>shvorak_description_description_grid.shvorak_description_description_grid_data_source</externalProvider>
+                <ns>shvorak_description_description_grid</ns>
+                <imports>
+                    <link name="productId">${$.provider}:data.product.current_product_id</link>
+                </imports>
+                <exports>
+                    <link name="productId">${$.externalProvider}:params.current_product_id</link>
+                </exports>
+            </settings>
+        </insertListing>
+    </fieldset>
+
+</form>
