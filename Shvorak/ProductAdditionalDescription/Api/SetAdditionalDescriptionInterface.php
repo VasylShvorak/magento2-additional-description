@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Shvorak\ProductAdditionalDescription\Api;
 
-
 interface SetAdditionalDescriptionInterface
 {
 
     /**
+     * Save Additional Description of product
      * @param int $productId
      * @param string $description
      */

@@ -13,7 +13,9 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Eav\Model\Entity\Attribute\SetFactory as AttributeSetFactory;
 
-
+/**
+ * Class Create customer attribute 'Is allowed to add description'
+ */
 class CustomerIsAlloweToAddDescription implements DataPatchInterface
 {
     /**
@@ -32,7 +34,6 @@ class CustomerIsAlloweToAddDescription implements DataPatchInterface
     protected $attributeSetFactory;
 
     /**
-     * AddCustomerPhoneNumberAttribute constructor.
      * @param ModuleDataSetupInterface $moduleDataSetup
      * @param CustomerSetupFactory $customerSetupFactory
      * @param AttributeSetFactory $attributeSetFactory
@@ -46,8 +47,6 @@ class CustomerIsAlloweToAddDescription implements DataPatchInterface
         $this->customerSetupFactory = $customerSetupFactory;
         $this->attributeSetFactory = $attributeSetFactory;
     }
-
-
 
     /**
      * @inheritdoc
@@ -100,7 +99,6 @@ class CustomerIsAlloweToAddDescription implements DataPatchInterface
         return [];
     }
 
-
     /**
      * @inheritdoc
      */
@@ -109,3 +107,4 @@ class CustomerIsAlloweToAddDescription implements DataPatchInterface
         return [];
     }
 }
+

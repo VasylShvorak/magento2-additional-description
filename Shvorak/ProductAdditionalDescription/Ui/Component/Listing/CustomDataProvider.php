@@ -1,6 +1,11 @@
 <?php
-namespace Shvorak\ProductAdditionalDescription\Ui\Component\Listing;
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
 
+namespace Shvorak\ProductAdditionalDescription\Ui\Component\Listing;
 
 use Magento\Framework\App\RequestInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
@@ -19,15 +24,14 @@ class CustomDataProvider extends AbstractDataProvider
 
     /**
      * @var RequestInterface
-     * @since 100.1.0
      */
     private $request;
 
     /**
      * CustomDataProvider constructor.
-     * @param $name
-     * @param $primaryFieldName
-     * @param $requestFieldName
+     * @param string $name
+     * @param string $primaryFieldName
+     * @param string $requestFieldName
      * @param CollectionFactory $collectionFactory
      * @param RequestInterface $request
      * @param array $meta
@@ -68,23 +72,6 @@ class CustomDataProvider extends AbstractDataProvider
         }
 
        return $arrItems;
-
-        /*return [
-            'items' => [
-                [
-                    'product_id' => 1,
-                    'additional_description' => 'First Item'
-                ],
-                [
-                    'product_id' => 2,
-                    'additional_description' => 'Second Item'
-                ],
-                [
-                    'product_id' => 3,
-                    'additional_description' => 'Third Item'
-                ]
-            ],
-            'totalRecords' => 3
-        ];*/
     }
 }
+

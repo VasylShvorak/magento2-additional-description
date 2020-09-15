@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
 
 namespace Shvorak\ProductAdditionalDescription\Block;
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -33,14 +37,17 @@ class AdditionalDescription extends \Magento\Framework\View\Element\Template
         Template\Context $context,
         HttpContext $httpContext,
         Session $customerSession,
-        array $data = [])
-    {
+        array $data = []
+    ){
         parent::__construct($context, $data);
         $this->httpContext = $httpContext;
         $this->customerSession = $customerSession;
-
     }
 
+    /**
+     * Add product id to url params
+     * @return string
+     */
     public function getAction()
     {
         return $this->getUrl(
@@ -51,11 +58,19 @@ class AdditionalDescription extends \Magento\Framework\View\Element\Template
         );
     }
 
+    /**
+     * Check if customer is logged in
+     * @return mixed|null
+     */
     public function isCustomerLoggedIn()
     {
        return $this->httpContext->getValue(CustomerContext::CONTEXT_AUTH);
     }
 
+    /**
+     * Verify if customer is allowed to add addtional description
+     * @return mixed
+     */
     public function isAdditionalDescriptionAllowed()
     {
         return $this->customerSession->getCustomer()->getAddDescription();
@@ -71,5 +86,4 @@ class AdditionalDescription extends \Magento\Framework\View\Element\Template
     {
         return $this->getRequest()->getParam('id', false);
     }
-
 }

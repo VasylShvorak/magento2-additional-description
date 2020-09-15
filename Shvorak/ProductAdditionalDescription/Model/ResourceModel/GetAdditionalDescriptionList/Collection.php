@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
 
 namespace Shvorak\ProductAdditionalDescription\Model\ResourceModel\GetAdditionalDescriptionList;
 
@@ -9,7 +13,10 @@ class Collection extends AbstractCollection
 {
     protected function _construct()
     {
-        $this->_init('Shvorak\ProductAdditionalDescription\Model\GetAdditionalDescriptionList','Shvorak\ProductAdditionalDescription\Model\ResourceModel\GetAdditionalDescriptionList');
+        $this->_init(
+            'Shvorak\ProductAdditionalDescription\Model\GetAdditionalDescriptionList',
+            'Shvorak\ProductAdditionalDescription\Model\ResourceModel\GetAdditionalDescriptionList'
+        );
     }
 
     /**
@@ -23,6 +30,4 @@ class Collection extends AbstractCollection
         $this->getSelect()->where('product_id = ?', $entityId);
         return $this;
     }
-
-
 }

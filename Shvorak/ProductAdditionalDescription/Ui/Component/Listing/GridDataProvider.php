@@ -1,8 +1,11 @@
 <?php
-
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
 
 namespace Shvorak\ProductAdditionalDescription\Ui\Component\Listing;
-
 
 use Magento\Framework\App\RequestInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
@@ -15,9 +18,9 @@ class GridDataProvider extends AbstractDataProvider
 
     /**
      * CustomDataProvider constructor.
-     * @param $name
-     * @param $primaryFieldName
-     * @param $requestFieldName
+     * @param string $name
+     * @param string $primaryFieldName
+     * @param string $requestFieldName
      * @param CollectionFactory $collectionFactory
      * @param RequestInterface $request
      * @param array $meta
@@ -38,9 +41,12 @@ class GridDataProvider extends AbstractDataProvider
         $this->request = $request;
     }
 
+    /**
+     * Get data
+     * @return array
+     */
     public function getData()
     {
-
         $this->collection->addEntityFilter($this->request->getParam('current_product_id', 0));
 
         $arrItems = [
@@ -55,23 +61,5 @@ class GridDataProvider extends AbstractDataProvider
         }
 
         return $arrItems;
-        /*return [
-            'items' => [
-                [
-                    'product_id' => 1,
-                    'additional_description' => 'First Item'
-                ],
-                [
-                    'product_id' => 2,
-                    'additional_description' => 'Second Item'
-                ],
-                [
-                    'product_id' => 3,
-                    'additional_description' => 'Third Item'
-                ]
-            ],
-            'totalRecords' => 3
-        ];*/
     }
-
 }

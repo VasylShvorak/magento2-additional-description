@@ -1,14 +1,25 @@
 <?php
-namespace Shvorak\ProductAdditionalDescription\Ui\Component\Listing\Column;
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
 
+namespace Shvorak\ProductAdditionalDescription\Ui\Component\Listing\Column;
 
 /**
  * Class PageActions
  */
 class PageActions extends \Magento\Ui\Component\Listing\Columns\Column
 {
+    /**
+     * Prepare Actions link
+     * @param array $dataSource
+     * @return array
+     */
     public function prepareDataSource(array $dataSource)
     {
+        //TODO: Add Actions link to grid
         if (isset($dataSource["data"]["items"])) {
             foreach ($dataSource["data"]["items"] as & $item) {
                 $name = $this->getData("name");
@@ -24,8 +35,7 @@ class PageActions extends \Magento\Ui\Component\Listing\Columns\Column
                 ];
             }
         }
-
         return $dataSource;
-    }    
-    
+    }
 }
+

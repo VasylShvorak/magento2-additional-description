@@ -1,15 +1,16 @@
 <?php
-
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
 
 namespace Shvorak\ProductAdditionalDescription\Controller\Product;
-
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface as HttpPostActionInterface;
 use Shvorak\ProductAdditionalDescription\Api\SetAdditionalDescriptionInterface;
-
-
 
 class Save extends Action
 {
@@ -20,14 +21,13 @@ class Save extends Action
 
     /**
      * Save constructor.
-     * @param Context
-     * @param SetAdditionalDescriptionInterface
+     * @param Context $context
+     * @param SetAdditionalDescriptionInterface $setDescription
      */
     public function __construct(
         Context $context,
         SetAdditionalDescriptionInterface $setDescription
-    )
-    {
+    ){
         parent::__construct($context);
         $this->setDescription = $setDescription;
     }
@@ -40,10 +40,9 @@ class Save extends Action
         $resultRedirect = $this->resultRedirectFactory->create();
         $description = $this->getRequest()->getPostValue('additional_description');
         $productId = (int)$this->getRequest()->getParam('id');
-        $this->setDescription->execute($productId,$description);
+        $this->setDescription->execute($productId, $description);
         //TODO: check if data passed from form
         //and redirect to current page
         return $resultRedirect->setPath('/');
-
     }
 }

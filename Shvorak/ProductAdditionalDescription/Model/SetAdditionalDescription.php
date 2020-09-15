@@ -16,18 +16,18 @@ class SetAdditionalDescription implements SetAdditionalDescriptionInterface
     /**
      * @param SaveAdditionalDescription $saveAdditionalDescription
      */
-    public function __construct( SaveAdditionalDescription $saveAdditionalDescription )
+    public function __construct(SaveAdditionalDescription $saveAdditionalDescription)
     {
         $this->saveAdditionalDescription = $saveAdditionalDescription;
     }
 
     /**
+     * Save Additional Description of product
      * @param int $productId
      * @param string $description
      */
     public function execute(int $productId, $description): void
     {
-        // TODO: Implement execute() method.
         $this->saveAdditionalDescription->execute($productId, $description);
     }
 }

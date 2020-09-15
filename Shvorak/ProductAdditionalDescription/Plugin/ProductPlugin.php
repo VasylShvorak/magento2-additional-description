@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
 
 namespace Shvorak\ProductAdditionalDescription\Plugin;
 
@@ -13,7 +17,6 @@ use Magento\Catalog\Model\ProductFactory;
 
 class ProductPlugin
 {
-
     /**
      * @var SetAdditionalDescriptionInterface
      */
@@ -52,7 +55,9 @@ class ProductPlugin
     }
 
     /**
-     * TODO create methods for afet plugin getList
+     * @param ProductRepositoryInterface $subject
+     * @param ProductInterface $product
+     * @return ProductInterface
      */
     public function afterGet
     (
@@ -69,6 +74,11 @@ class ProductPlugin
         return $product;
     }
 
+    /**
+     * @param ProductRepositoryInterface $subject
+     * @param ProductSearchResultsInterface $searchCriteria
+     * @return ProductSearchResultsInterface
+     */
     public function afterGetList(
         ProductRepositoryInterface $subject,
         ProductSearchResultsInterface $searchCriteria
@@ -97,25 +107,26 @@ class ProductPlugin
     (
         ProductRepositoryInterface $subject,
         ProductInterface $product
-    ) {
+    ){
         if ($this->currentProduct !== null) {
             $productId = $this->currentProduct->getId();
             /** @var ProductInterface $currentProduct */
             $extensionAttributes = $this->currentProduct->getExtensionAttributes();
 
             if ($extensionAttributes && $extensionAttributes->getAdditionalDesciption()) {
-                /**
-                 * TODO: add $this->setAdditionalDescription->execute()
-                 */
                 $this->setAdditionalDescription->execute($productId);
-
             }
-
         }
 
         return $product;
     }
 
+    /**
+     * @param ProductRepositoryInterface $subject
+     * @param \Closure $proceed
+     * @param $customerId
+     * @return mixed
+     */
     public function aroundGetById(ProductRepositoryInterface $subject, \Closure $proceed, $customerId)
     {
         $product = $proceed($customerId);
@@ -141,5 +152,4 @@ class ProductPlugin
 
         return $product;
     }
-
 }

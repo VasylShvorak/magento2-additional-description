@@ -21,7 +21,7 @@ class SaveAdditionalDescription
      */
     public function __construct(
         ResourceConnection $resourceConnection
-    ) {
+    ){
         $this->resourceConnection = $resourceConnection;
     }
 
@@ -46,5 +46,4 @@ class SaveAdditionalDescription
             ]
         );
     }
-
 }
