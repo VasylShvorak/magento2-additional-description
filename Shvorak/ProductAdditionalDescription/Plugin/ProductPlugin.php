@@ -38,15 +38,16 @@ class ProductPlugin
     private $productFactory;
 
     /**
-     * @param SetAdditionalDescriptionInterface $setAdditionalDescriptionInterface
+     * @param SetAdditionalDescriptionInterface $setAdditionalDescription
      * @param GetAdditionalDescription $getAdditionalDescription
+     * @param ProductExtensionFactory $productExtensionFactory
+     * @param ProductFactory $productFactory
      */
     public function __construct(
         SetAdditionalDescriptionInterface $setAdditionalDescription,
         GetAdditionalDescription $getAdditionalDescription,
         ProductExtensionFactory $productExtensionFactory,
         ProductFactory $productFactory
-
     ) {
         $this->setAdditionalDescription = $setAdditionalDescription;
         $this->getAdditionalDescription = $getAdditionalDescription;
@@ -55,26 +56,27 @@ class ProductPlugin
     }
 
     /**
+     * After get plugin
+     *
      * @param ProductRepositoryInterface $subject
      * @param ProductInterface $product
      * @return ProductInterface
      */
-    public function afterGet
-    (
+    public function afterGet(
         ProductRepositoryInterface $subject,
         ProductInterface $product
     ) {
         $productId=$product->getId();
         $additionalDescription = $this->getAdditionalDescription->execute($productId);
-
         $extensionAttributes = $product->getExtensionAttributes(); /** get current extension attributes from entity **/
         $extensionAttributes->setAdditionalDescription($additionalDescription);
         $product->setExtensionAttributes($extensionAttributes);
-
         return $product;
     }
 
     /**
+     * After get list plugin
+     *
      * @param ProductRepositoryInterface $subject
      * @param ProductSearchResultsInterface $searchCriteria
      * @return ProductSearchResultsInterface
@@ -82,8 +84,7 @@ class ProductPlugin
     public function afterGetList(
         ProductRepositoryInterface $subject,
         ProductSearchResultsInterface $searchCriteria
-    ) : ProductSearchResultsInterface
-    {
+    ) : ProductSearchResultsInterface {
         $products = [];
         foreach ($searchCriteria->getItems() as $entity) {
             $additionalDescription = $this->getAdditionalDescription->execute($entity->getId());
@@ -99,15 +100,16 @@ class ProductPlugin
     }
 
     /**
+     * After save plugin
+     *
      * @param ProductRepositoryInterface $subject
      * @param ProductInterface $product
      * @return ProductInterface
      */
-    public function afterSave
-    (
+    public function afterSave(
         ProductRepositoryInterface $subject,
         ProductInterface $product
-    ){
+    ) {
         if ($this->currentProduct !== null) {
             $productId = $this->currentProduct->getId();
             /** @var ProductInterface $currentProduct */
@@ -122,9 +124,11 @@ class ProductPlugin
     }
 
     /**
+     * Around get product by id plugin
+     *
      * @param ProductRepositoryInterface $subject
      * @param \Closure $proceed
-     * @param $customerId
+     * @param int $customerId
      * @return mixed
      */
     public function aroundGetById(ProductRepositoryInterface $subject, \Closure $proceed, $customerId)
@@ -133,12 +137,12 @@ class ProductPlugin
 
         $productExtensionAttributes = $product->getExtensionAttributes();
         //if extension attribute is already set, return early.
-        if($productExtensionAttributes && $productExtensionAttributes->getAdditionalDescription()) {
+        if ($productExtensionAttributes && $productExtensionAttributes->getAdditionalDescription()) {
             return $product;
         }
 
         //In the event that extension attribute class has not be instantiated yet, we create it ourselves.
-        if(!$product->getExtensionAttributes()) {
+        if (!$product->getExtensionAttributes()) {
             $productExtension = $this->productExtensionFactory->create();
             $product->setExtensionAttributes($productExtension);
         }

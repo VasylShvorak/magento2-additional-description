@@ -9,9 +9,9 @@ namespace Shvorak\ProductAdditionalDescription\Api;
 
 interface SetAdditionalDescriptionInterface
 {
-
     /**
      * Save Additional Description of product
+     *
      * @param int $productId
      * @param string $description
      */

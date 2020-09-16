@@ -30,6 +30,8 @@ class Index extends Action
     }
 
     /**
+     * Controller for additional description grid
+     *
      * @return \Magento\Framework\Controller\ResultInterface
      */
     public function execute()

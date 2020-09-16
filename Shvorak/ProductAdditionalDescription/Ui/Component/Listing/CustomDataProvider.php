@@ -45,7 +45,7 @@ class CustomDataProvider extends AbstractDataProvider
         RequestInterface $request,
         array $meta = [],
         array $data = []
-    ){
+    ) {
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
         $this->collectionFactory = $collectionFactory;
         $this->collection = $this->collectionFactory->create();
@@ -71,7 +71,6 @@ class CustomDataProvider extends AbstractDataProvider
             $arrItems['items'][] = $item;
         }
 
-       return $arrItems;
+        return $arrItems;
     }
 }
-

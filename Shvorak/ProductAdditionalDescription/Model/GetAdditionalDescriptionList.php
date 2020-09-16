@@ -9,6 +9,7 @@ namespace Shvorak\ProductAdditionalDescription\Model;
 
 use Magento\Framework\Model\AbstractModel;
 use Shvorak\ProductAdditionalDescription\Api\GetAdditionalDescriptionListInterface;
+use Shvorak\ProductAdditionalDescription\Model\ResourceModel\GetAdditionalDescriptionList as ResourceModel;
 
 class GetAdditionalDescriptionList extends AbstractModel implements GetAdditionalDescriptionListInterface
 {
@@ -17,6 +18,6 @@ class GetAdditionalDescriptionList extends AbstractModel implements GetAdditiona
      */
     protected function _construct()
     {
-        $this->_init('Shvorak\ProductAdditionalDescription\Model\ResourceModel\GetAdditionalDescriptionList');
+        $this->_init(ResourceModel::class);
     }
 }

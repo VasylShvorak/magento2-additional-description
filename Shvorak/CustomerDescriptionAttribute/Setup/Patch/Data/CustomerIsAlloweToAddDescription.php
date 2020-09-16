@@ -42,7 +42,7 @@ class CustomerIsAlloweToAddDescription implements DataPatchInterface
         ModuleDataSetupInterface $moduleDataSetup,
         CustomerSetupFactory $customerSetupFactory,
         AttributeSetFactory $attributeSetFactory
-    ){
+    ) {
         $this->moduleDataSetup = $moduleDataSetup;
         $this->customerSetupFactory = $customerSetupFactory;
         $this->attributeSetFactory = $attributeSetFactory;
@@ -107,4 +107,3 @@ class CustomerIsAlloweToAddDescription implements DataPatchInterface
         return [];
     }
 }
-

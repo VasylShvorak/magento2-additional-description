@@ -34,7 +34,7 @@ class GridDataProvider extends AbstractDataProvider
         RequestInterface $request,
         array $meta = [],
         array $data = []
-    ){
+    ) {
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
         $this->collectionFactory = $collectionFactory;
         $this->collection = $this->collectionFactory->create();
@@ -43,6 +43,7 @@ class GridDataProvider extends AbstractDataProvider
 
     /**
      * Get data
+     *
      * @return array
      */
     public function getData()

@@ -23,6 +23,7 @@ class SetAdditionalDescription implements SetAdditionalDescriptionInterface
 
     /**
      * Save Additional Description of product
+     *
      * @param int $productId
      * @param string $description
      */

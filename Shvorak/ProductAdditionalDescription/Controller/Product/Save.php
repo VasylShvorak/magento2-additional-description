@@ -27,7 +27,7 @@ class Save extends Action
     public function __construct(
         Context $context,
         SetAdditionalDescriptionInterface $setDescription
-    ){
+    ) {
         parent::__construct($context);
         $this->setDescription = $setDescription;
     }

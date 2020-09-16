@@ -21,7 +21,7 @@ class SaveAdditionalDescription
      */
     public function __construct(
         ResourceConnection $resourceConnection
-    ){
+    ) {
         $this->resourceConnection = $resourceConnection;
     }
 
@@ -36,8 +36,6 @@ class SaveAdditionalDescription
     {
         $connection = $this->resourceConnection->getConnection();
         $tableName = $this->resourceConnection->getTableName('shvorak_additional_description');
-
-
         $connection->insertOnDuplicate(
             $tableName,
             [

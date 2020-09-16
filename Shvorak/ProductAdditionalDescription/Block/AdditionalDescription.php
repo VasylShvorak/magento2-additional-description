@@ -6,6 +6,7 @@
 declare(strict_types=1);
 
 namespace Shvorak\ProductAdditionalDescription\Block;
+
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Block\Product\View;
 use Magento\Customer\Model\Context;
@@ -38,7 +39,7 @@ class AdditionalDescription extends \Magento\Framework\View\Element\Template
         HttpContext $httpContext,
         Session $customerSession,
         array $data = []
-    ){
+    ) {
         parent::__construct($context, $data);
         $this->httpContext = $httpContext;
         $this->customerSession = $customerSession;
@@ -46,6 +47,7 @@ class AdditionalDescription extends \Magento\Framework\View\Element\Template
 
     /**
      * Add product id to url params
+     *
      * @return string
      */
     public function getAction()
@@ -60,15 +62,17 @@ class AdditionalDescription extends \Magento\Framework\View\Element\Template
 
     /**
      * Check if customer is logged in
+     *
      * @return mixed|null
      */
     public function isCustomerLoggedIn()
     {
-       return $this->httpContext->getValue(CustomerContext::CONTEXT_AUTH);
+        return $this->httpContext->getValue(CustomerContext::CONTEXT_AUTH);
     }
 
     /**
      * Verify if customer is allowed to add addtional description
+     *
      * @return mixed
      */
     public function isAdditionalDescriptionAllowed()
