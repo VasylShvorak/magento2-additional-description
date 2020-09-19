@@ -8,10 +8,8 @@ declare(strict_types=1);
 namespace Shvorak\ProductAdditionalDescription\Plugin;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
-use Magento\Catalog\Api\Data\ProductInterface;
 use Shvorak\ProductAdditionalDescription\Api\SetAdditionalDescriptionInterface;
 use Shvorak\ProductAdditionalDescription\Model\ResourceModel\GetAdditionalDescription;
-use Magento\Catalog\Api\Data\ProductSearchResultsInterface;
 use Magento\Catalog\Api\Data\ProductExtensionFactory;
 use Magento\Catalog\Model\ProductFactory;
 
@@ -55,73 +53,6 @@ class ProductPlugin
         $this->productExtensionFactory = $productExtensionFactory;
     }
 
-    /**
-     * After get plugin
-     *
-     * @param ProductRepositoryInterface $subject
-     * @param ProductInterface $product
-     * @return ProductInterface
-     */
-    public function afterGet(
-        ProductRepositoryInterface $subject,
-        ProductInterface $product
-    ) {
-        $productId=$product->getId();
-        $additionalDescription = $this->getAdditionalDescription->execute($productId);
-        $extensionAttributes = $product->getExtensionAttributes(); /** get current extension attributes from entity **/
-        $extensionAttributes->setAdditionalDescription($additionalDescription);
-        $product->setExtensionAttributes($extensionAttributes);
-        return $product;
-    }
-
-    /**
-     * After get list plugin
-     *
-     * @param ProductRepositoryInterface $subject
-     * @param ProductSearchResultsInterface $searchCriteria
-     * @return ProductSearchResultsInterface
-     */
-    public function afterGetList(
-        ProductRepositoryInterface $subject,
-        ProductSearchResultsInterface $searchCriteria
-    ) : ProductSearchResultsInterface {
-        $products = [];
-        foreach ($searchCriteria->getItems() as $entity) {
-            $additionalDescription = $this->getAdditionalDescription->execute($entity->getId());
-
-            $extensionAttributes = $entity->getExtensionAttributes();
-            $extensionAttributes->setAdditionalDescription($extensionAttributes);
-            $entity->setExtensionAttributes($extensionAttributes);
-
-            $products[] = $entity;
-        }
-        $searchCriteria->setItems($products);
-        return $searchCriteria;
-    }
-
-    /**
-     * After save plugin
-     *
-     * @param ProductRepositoryInterface $subject
-     * @param ProductInterface $product
-     * @return ProductInterface
-     */
-    public function afterSave(
-        ProductRepositoryInterface $subject,
-        ProductInterface $product
-    ) {
-        if ($this->currentProduct !== null) {
-            $productId = $this->currentProduct->getId();
-            /** @var ProductInterface $currentProduct */
-            $extensionAttributes = $this->currentProduct->getExtensionAttributes();
-
-            if ($extensionAttributes && $extensionAttributes->getAdditionalDesciption()) {
-                $this->setAdditionalDescription->execute($productId);
-            }
-        }
-
-        return $product;
-    }
 
     /**
      * Around get product by id plugin
@@ -151,9 +82,10 @@ class ProductPlugin
         $productId=$product->getId();
         $additionalDescription = $this->getAdditionalDescription->execute($productId);
 
-        $value =$additionalDescription['additional_description'];
-        $product->getExtensionAttributes()->setAdditionalDescription($value);
-
+        if ($additionalDescription) {
+            $value = $additionalDescription['additional_description'];
+            $product->getExtensionAttributes()->setAdditionalDescription($value);
+        }
         return $product;
     }
 }
